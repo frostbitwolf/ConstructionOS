@@ -4,9 +4,9 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('tasks');
   const [activeRole, setActiveRole] = useState('Project Manager');
 
-  // --- States & Handlers ---
-  
-  // Tasks
+  // --- States & Handlers for All Modules ---
+
+  // 1. Tasks
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Foundation Concrete Pouring', role: 'Site Engineer', priority: 'Medium', status: 'Completed' }
   ]);
@@ -22,7 +22,7 @@ export default function App() {
   };
   const removeTask = (id) => setTasks(tasks.filter(t => t.id !== id));
 
-  // Inventory
+  // 2. Inventory
   const [inventory, setInventory] = useState([
     { id: 1, item: 'Cement Bags', qty: '500 Bags' },
     { id: 2, item: 'Steel Rebar 12mm', qty: '2 Tons' }
@@ -39,7 +39,7 @@ export default function App() {
   };
   const removeInventory = (id) => setInventory(inventory.filter(i => i.id !== id));
 
-  // Labour
+  // 3. Labour
   const [workers, setWorkers] = useState([
     { id: 1, name: "Ramesh Kumar", role: "Mason", wage: "₹800/day", status: "Present" },
     { id: 2, name: "Sravant", role: "Steel Fixer", wage: "₹1000/day", status: "Present" }
@@ -63,7 +63,7 @@ export default function App() {
   };
   const removeWorker = (id) => setWorkers(workers.filter(w => w.id !== id));
 
-  // Expenses
+  // 4. Expenses
   const [expenses, setExpenses] = useState([
     { id: 1, title: 'Raw Material Delivery', amount: '₹45,000' },
     { id: 2, title: 'Equipment Rental', amount: '₹12,500' }
@@ -81,23 +81,26 @@ export default function App() {
   const removeExpense = (id) => setExpenses(expenses.filter(e => e.id !== id));
 
   return (
-    <div className="min-h-screen bg-[#f4f6f9] text-slate-800 p-6 font-sans">
+    <div className="min-h-screen bg-[#f1f3f6] text-slate-800 p-6 font-sans">
       
       {/* Top Header */}
       <header className="max-w-6xl mx-auto flex justify-between items-center mb-6">
         <div className="flex items-center space-x-3">
-          <div className="bg-amber-500 p-2 rounded-md text-white font-bold text-lg">🏗️</div>
+          <div className="p-1">
+            <span className="text-3xl">🏗️</span>
+          </div>
           <div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">ConstructionOS</h1>
-            <p className="text-xs font-semibold text-slate-500">Full-Stack Suite</p>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+              ConstructionOS <span className="text-slate-500 text-lg font-bold ml-2">- Full Stack Suite</span>
+            </h1>
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <span className="text-sm font-bold text-slate-700">Active Role:</span>
+          <span className="text-sm font-bold text-slate-600">Active Role:</span>
           <select 
             value={activeRole} 
             onChange={(e) => setActiveRole(e.target.value)}
-            className="bg-[#2d3748] text-white text-sm font-medium rounded-md px-3 py-2 focus:outline-none"
+            className="bg-[#2d3748] text-white text-sm font-semibold rounded-md px-3 py-2 focus:outline-none"
           >
             <option>Project Manager</option>
             <option>Site Engineer</option>
@@ -106,7 +109,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Tab Navigation */}
+      {/* Navigation Tabs */}
       <div className="max-w-6xl mx-auto flex flex-wrap gap-2 mb-6">
         {[
           { id: 'tasks', label: 'Tasks', icon: '📋' },
@@ -121,7 +124,7 @@ export default function App() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-bold text-sm transition ${
               activeTab === tab.id
-                ? 'bg-blue-600 text-white shadow'
+                ? 'bg-[#2563eb] text-white shadow'
                 : 'bg-[#e2e8f0] text-slate-700 hover:bg-slate-300'
             }`}
           >
@@ -138,20 +141,20 @@ export default function App() {
         {activeTab === 'tasks' && (
           <>
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Assign New Task</h2>
+              <h2 className="text-xl font-extrabold text-slate-800 mb-4 text-center">Assign New Task</h2>
               <form onSubmit={handleAddTask} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Task Description"
                   value={taskTitle}
                   onChange={(e) => setTaskTitle(e.target.value)}
-                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
                 <select
                   value={taskRole}
                   onChange={(e) => setTaskRole(e.target.value)}
-                  className="bg-[#333d42] text-white rounded-md p-2.5 text-sm focus:outline-none"
+                  className="bg-[#333d42] text-white rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 >
                   <option>Site Engineer</option>
                   <option>Project Manager</option>
@@ -159,31 +162,31 @@ export default function App() {
                 <select
                   value={taskPriority}
                   onChange={(e) => setTaskPriority(e.target.value)}
-                  className="bg-[#333d42] text-white rounded-md p-2.5 text-sm focus:outline-none"
+                  className="bg-[#333d42] text-white rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 >
                   <option>Medium</option>
                   <option>High</option>
                   <option>Low</option>
                 </select>
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
+                <button type="submit" className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
                   + Create Task
                 </button>
               </form>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Task List ({tasks.length})</h2>
-              <div className="space-y-3">
+              <h2 className="text-xl font-extrabold text-slate-800 mb-6 text-center">Task List ({tasks.length})</h2>
+              <div className="space-y-4">
                 {tasks.map((task) => (
-                  <div key={task.id} className="flex justify-between items-center p-4 border-b border-slate-100">
+                  <div key={task.id} className="flex justify-between items-center p-3 border-b border-slate-100">
                     <div className="flex items-center space-x-3">
                       <span className="font-bold text-slate-800 text-base">{task.title}</span>
-                      <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded">
+                      <span className="bg-[#e2e8f0] text-slate-700 text-xs font-semibold px-2.5 py-1 rounded">
                         Assigned: {task.role}
                       </span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-md">
+                    <div className="flex items-center space-x-3">
+                      <span className="bg-[#10b981] text-white text-xs font-bold px-3 py-1.5 rounded-md">
                         Status: {task.status}
                       </span>
                       <button 
@@ -195,7 +198,7 @@ export default function App() {
                     </div>
                   </div>
                 ))}
-                {tasks.length === 0 && <p className="text-center text-slate-400 py-4">No tasks found.</p>}
+                {tasks.length === 0 && <p className="text-center text-slate-400 py-4 font-medium">No active tasks.</p>}
               </div>
             </div>
           </>
@@ -205,14 +208,14 @@ export default function App() {
         {activeTab === 'inventory' && (
           <>
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Add Inventory Item</h2>
+              <h2 className="text-xl font-extrabold text-slate-800 mb-4 text-center">Add Inventory Item</h2>
               <form onSubmit={handleAddInventory} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Item Name (e.g. Bricks)"
                   value={itemName}
                   onChange={(e) => setItemName(e.target.value)}
-                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
                 <input
@@ -220,23 +223,23 @@ export default function App() {
                   placeholder="Quantity (e.g. 1000 Units)"
                   value={itemQty}
                   onChange={(e) => setItemQty(e.target.value)}
-                  className="bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
+                <button type="submit" className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
                   + Add Item
                 </button>
               </form>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Inventory Stock ({inventory.length})</h2>
-              <div className="space-y-3">
+              <h2 className="text-xl font-extrabold text-slate-800 mb-6 text-center">Inventory Stock ({inventory.length})</h2>
+              <div className="space-y-4">
                 {inventory.map((inv) => (
-                  <div key={inv.id} className="flex justify-between items-center p-4 border-b border-slate-100">
+                  <div key={inv.id} className="flex justify-between items-center p-3 border-b border-slate-100">
                     <div>
                       <p className="font-bold text-slate-800">{inv.item}</p>
-                      <p className="text-xs text-slate-500 font-medium">Quantity: {inv.qty}</p>
+                      <p className="text-xs text-slate-500 font-semibold">Quantity: {inv.qty}</p>
                     </div>
                     <button 
                       onClick={() => removeInventory(inv.id)}
@@ -246,7 +249,7 @@ export default function App() {
                     </button>
                   </div>
                 ))}
-                {inventory.length === 0 && <p className="text-center text-slate-400 py-4">No inventory items available.</p>}
+                {inventory.length === 0 && <p className="text-center text-slate-400 py-4 font-medium">No inventory items.</p>}
               </div>
             </div>
           </>
@@ -256,20 +259,20 @@ export default function App() {
         {activeTab === 'labour' && (
           <>
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Register New Worker</h2>
+              <h2 className="text-xl font-extrabold text-slate-800 mb-4 text-center">Register New Worker</h2>
               <form onSubmit={handleRegisterWorker} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Worker Full Name"
                   value={workerName}
                   onChange={(e) => setWorkerName(e.target.value)}
-                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
                 <select
                   value={workerRole}
                   onChange={(e) => setWorkerRole(e.target.value)}
-                  className="bg-[#333d42] text-white rounded-md p-2.5 text-sm focus:outline-none"
+                  className="bg-[#333d42] text-white rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 >
                   <option>Steel Fixer</option>
                   <option>Mason</option>
@@ -280,19 +283,19 @@ export default function App() {
                   placeholder="Daily Wage (₹)"
                   value={workerWage}
                   onChange={(e) => setWorkerWage(e.target.value)}
-                  className="bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 />
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
+                <button type="submit" className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
                   + Register Worker
                 </button>
               </form>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm overflow-x-auto">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Daily Attendance Roster</h2>
+              <h2 className="text-xl font-extrabold text-slate-800 mb-6 text-center">Daily Attendance Roster</h2>
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-100 text-slate-600 text-xs font-bold uppercase border-b">
+                  <tr className="bg-[#f1f5f9] text-slate-600 text-xs font-bold uppercase border-b">
                     <th className="p-3">Name</th>
                     <th className="p-3">Role</th>
                     <th className="p-3">Rate</th>
@@ -304,8 +307,8 @@ export default function App() {
                   {workers.map((worker) => (
                     <tr key={worker.id}>
                       <td className="p-3 font-bold text-slate-800">{worker.name}</td>
-                      <td className="p-3 text-slate-500">{worker.role}</td>
-                      <td className="p-3 text-slate-500">{worker.wage}</td>
+                      <td className="p-3 text-slate-500 font-medium">{worker.role}</td>
+                      <td className="p-3 text-slate-500 font-medium">{worker.wage}</td>
                       <td className="p-3">
                         <span className="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded font-bold">
                           {worker.status}
@@ -324,6 +327,9 @@ export default function App() {
                       </td>
                     </tr>
                   ))}
+                  {workers.length === 0 && (
+                    <tr><td colSpan="5" className="p-6 text-center text-slate-400 font-medium">No workers registered.</td></tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -334,14 +340,14 @@ export default function App() {
         {activeTab === 'expenses' && (
           <>
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Log New Expense</h2>
+              <h2 className="text-xl font-extrabold text-slate-800 mb-4 text-center">Log New Expense</h2>
               <form onSubmit={handleAddExpense} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Expense Description"
                   value={expTitle}
                   onChange={(e) => setExpTitle(e.target.value)}
-                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="flex-1 bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
                 <input
@@ -349,23 +355,23 @@ export default function App() {
                   placeholder="Amount (₹)"
                   value={expAmount}
                   onChange={(e) => setExpAmount(e.target.value)}
-                  className="bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm focus:outline-none"
+                  className="bg-[#333d42] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
+                <button type="submit" className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
                   + Add Expense
                 </button>
               </form>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-lg font-bold text-slate-800 mb-4 text-center">Recorded Expenses ({expenses.length})</h2>
-              <div className="space-y-3">
+              <h2 className="text-xl font-extrabold text-slate-800 mb-6 text-center">Recorded Expenses ({expenses.length})</h2>
+              <div className="space-y-4">
                 {expenses.map((exp) => (
-                  <div key={exp.id} className="flex justify-between items-center p-4 border-b border-slate-100">
+                  <div key={exp.id} className="flex justify-between items-center p-3 border-b border-slate-100">
                     <div>
                       <p className="font-bold text-slate-800">{exp.title}</p>
-                      <p className="text-xs text-slate-500 font-medium">Amount: {exp.amount}</p>
+                      <p className="text-xs text-slate-500 font-semibold">Amount: {exp.amount}</p>
                     </div>
                     <button 
                       onClick={() => removeExpense(exp.id)}
@@ -375,7 +381,7 @@ export default function App() {
                     </button>
                   </div>
                 ))}
-                {expenses.length === 0 && <p className="text-center text-slate-400 py-4">No expenses recorded.</p>}
+                {expenses.length === 0 && <p className="text-center text-slate-400 py-4 font-medium">No recorded expenses.</p>}
               </div>
             </div>
           </>
@@ -383,9 +389,9 @@ export default function App() {
 
         {/* --- DOCUMENTS & AI ANALYTICS --- */}
         {(activeTab === 'documents' || activeTab === 'analytics') && (
-          <div className="bg-white p-12 rounded-xl shadow-sm text-center text-slate-500">
-            <h2 className="text-xl font-bold text-slate-800 mb-2 capitalize">{activeTab} Dashboard</h2>
-            <p className="text-sm font-medium">Module view is active and ready.</p>
+          <div className="bg-white p-12 rounded-xl shadow-sm text-center">
+            <h2 className="text-xl font-extrabold text-slate-800 mb-2 capitalize">{activeTab} Dashboard</h2>
+            <p className="text-sm font-semibold text-slate-500">Module view is active and ready.</p>
           </div>
         )}
 
