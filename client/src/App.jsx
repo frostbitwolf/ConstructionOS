@@ -4,9 +4,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('tasks');
   const [activeRole, setActiveRole] = useState('Project Manager');
 
-  // --- States & Add/Remove Handlers for All Modules ---
-  
-  // 1. Tasks
+  // --- Tasks State & Handlers ---
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Foundation Concrete Pouring', role: 'Site Engineer', priority: 'High', status: 'Completed' }
   ]);
@@ -22,10 +20,10 @@ export default function App() {
   };
   const removeTask = (id) => setTasks(tasks.filter(t => t.id !== id));
 
-  // 2. Inventory
+  // --- Inventory State & Handlers ---
   const [inventory, setInventory] = useState([
-    { id: 1, name: 'Cement Bags', qty: '500 Bags', category: 'Raw Material' },
-    { id: 2, name: 'Steel Rebar 12mm', qty: '2 Tons', category: 'Structure' }
+    { id: 1, name: 'Cement Bags', qty: '500 Bags' },
+    { id: 2, name: 'Steel Rebar 12mm', qty: '2 Tons' }
   ]);
   const [itemName, setItemName] = useState('');
   const [itemQty, setItemQty] = useState('');
@@ -33,13 +31,13 @@ export default function App() {
   const handleAddInventory = (e) => {
     e.preventDefault();
     if (!itemName.trim() || !itemQty.trim()) return;
-    setInventory([...inventory, { id: Date.now(), name: itemName, qty: itemQty, category: 'General' }]);
+    setInventory([...inventory, { id: Date.now(), name: itemName, qty: itemQty }]);
     setItemName('');
     setItemQty('');
   };
   const removeInventory = (id) => setInventory(inventory.filter(i => i.id !== id));
 
-  // 3. Labour
+  // --- Labour State & Handlers ---
   const [workers, setWorkers] = useState([
     { id: 1, name: "Ramesh Kumar", role: "Mason", wage: "₹800/day", status: "Present" },
     { id: 2, name: "Sravant", role: "Steel Fixer", wage: "₹1000/day", status: "Present" }
@@ -63,10 +61,10 @@ export default function App() {
   };
   const removeWorker = (id) => setWorkers(workers.filter(w => w.id !== id));
 
-  // 4. Expenses
+  // --- Expenses State & Handlers ---
   const [expenses, setExpenses] = useState([
-    { id: 1, title: 'Raw Material Delivery', amount: '₹45,000', category: 'Logistics' },
-    { id: 2, title: 'Equipment Rental', amount: '₹12,500', category: 'Machinery' }
+    { id: 1, title: 'Raw Material Delivery', amount: '₹45,000' },
+    { id: 2, title: 'Equipment Rental', amount: '₹12,500' }
   ]);
   const [expTitle, setExpTitle] = useState('');
   const [expAmount, setExpAmount] = useState('');
@@ -74,16 +72,16 @@ export default function App() {
   const handleAddExpense = (e) => {
     e.preventDefault();
     if (!expTitle.trim() || !expAmount.trim()) return;
-    setExpenses([...expenses, { id: Date.now(), title: expTitle, amount: `₹${expAmount}`, category: 'General' }]);
+    setExpenses([...expenses, { id: Date.now(), title: expTitle, amount: `₹${expAmount}` }]);
     setExpTitle('');
     setExpAmount('');
   };
   const removeExpense = (id) => setExpenses(expenses.filter(e => e.id !== id));
 
   return (
-    <div className="min-h-screen bg-slate-100 font-sans text-slate-800 p-6">
+    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', color: '#1e293b' }} className="p-6 font-sans">
       
-      {/* Top Header matching original UI */}
+      {/* Top Header */}
       <header className="max-w-6xl mx-auto bg-white shadow-sm rounded-xl p-4 mb-6 flex justify-between items-center border border-slate-200">
         <div className="flex items-center space-x-3">
           <div className="bg-amber-500 p-2 rounded-lg text-white font-bold text-lg">🏗️</div>
@@ -97,7 +95,7 @@ export default function App() {
           <select 
             value={activeRole} 
             onChange={(e) => setActiveRole(e.target.value)}
-            className="border border-slate-300 rounded-lg px-3 py-1.5 text-sm bg-white font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-slate-300 rounded-lg px-3 py-1.5 text-sm bg-white text-slate-800 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option>Project Manager</option>
             <option>Site Engineer</option>
@@ -106,7 +104,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Navigation Tabs matching original UI */}
+      {/* Navigation Tabs */}
       <div className="max-w-6xl mx-auto flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-3">
         {[
           { id: 'tasks', label: 'Tasks', icon: '📋' },
@@ -145,13 +143,13 @@ export default function App() {
                   placeholder="Task Description"
                   value={taskDesc}
                   onChange={(e) => setTaskDesc(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
                 <select
                   value={taskRole}
                   onChange={(e) => setTaskRole(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                 >
                   <option>Site Engineer</option>
                   <option>Project Manager</option>
@@ -160,7 +158,7 @@ export default function App() {
                 <select
                   value={taskPriority}
                   onChange={(e) => setTaskPriority(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                 >
                   <option>High</option>
                   <option>Medium</option>
@@ -176,7 +174,7 @@ export default function App() {
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 text-center">Task List ({tasks.length})</h2>
               <div className="space-y-3">
                 {tasks.map((task) => (
-                  <div key={task.id} className="flex justify-between items-center p-4 border border-slate-100 rounded-lg bg-slate-50/50 hover:bg-slate-50 transition">
+                  <div key={task.id} className="flex justify-between items-center p-4 border border-slate-100 rounded-lg bg-slate-50 hover:bg-slate-100 transition">
                     <div>
                       <p className="font-semibold text-slate-800">{task.title}</p>
                       <div className="flex gap-2 mt-1">
@@ -212,7 +210,7 @@ export default function App() {
                   placeholder="Item Name (e.g. Bricks)"
                   value={itemName}
                   onChange={(e) => setItemName(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                   required
                 />
                 <input
@@ -220,7 +218,7 @@ export default function App() {
                   placeholder="Quantity (e.g. 1000 Units)"
                   value={itemQty}
                   onChange={(e) => setItemQty(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                   required
                 />
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm py-2.5 px-4 rounded-lg transition shadow-sm">
@@ -233,7 +231,7 @@ export default function App() {
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 text-center">Inventory Stock ({inventory.length})</h2>
               <div className="space-y-3">
                 {inventory.map((inv) => (
-                  <div key={inv.id} className="flex justify-between items-center p-4 border border-slate-100 rounded-lg bg-slate-50/50">
+                  <div key={inv.id} className="flex justify-between items-center p-4 border border-slate-100 rounded-lg bg-slate-50">
                     <div>
                       <p className="font-semibold text-slate-800">{inv.name}</p>
                       <p className="text-xs text-slate-500 mt-1">Quantity: {inv.qty}</p>
@@ -263,13 +261,13 @@ export default function App() {
                   placeholder="Worker Full Name"
                   value={workerName}
                   onChange={(e) => setWorkerName(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                   required
                 />
                 <select
                   value={workerRole}
                   onChange={(e) => setWorkerRole(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                 >
                   <option>Steel Fixer</option>
                   <option>Mason</option>
@@ -281,7 +279,7 @@ export default function App() {
                   placeholder="Daily Wage (₹)"
                   value={workerWage}
                   onChange={(e) => setWorkerWage(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                 />
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm py-2.5 px-4 rounded-lg transition shadow-sm">
                   + Register Worker
@@ -306,7 +304,7 @@ export default function App() {
                   </thead>
                   <tbody className="divide-y divide-slate-100 text-sm">
                     {workers.map((worker) => (
-                      <tr key={worker.id} className="hover:bg-slate-50/50 transition">
+                      <tr key={worker.id} className="hover:bg-slate-50 transition">
                         <td className="p-4 font-medium text-slate-700">{worker.name}</td>
                         <td className="p-4 text-slate-500">{worker.role}</td>
                         <td className="p-4 text-slate-500">{worker.wage}</td>
@@ -349,7 +347,7 @@ export default function App() {
                   placeholder="Expense Description"
                   value={expTitle}
                   onChange={(e) => setExpTitle(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                   required
                 />
                 <input
@@ -357,7 +355,7 @@ export default function App() {
                   placeholder="Amount (₹)"
                   value={expAmount}
                   onChange={(e) => setExpAmount(e.target.value)}
-                  className="border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-none"
+                  className="border border-slate-300 rounded-lg p-2.5 text-sm bg-white text-slate-800 focus:outline-none"
                   required
                 />
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm py-2.5 px-4 rounded-lg transition shadow-sm">
@@ -370,7 +368,7 @@ export default function App() {
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 text-center">Recorded Expenses ({expenses.length})</h2>
               <div className="space-y-3">
                 {expenses.map((exp) => (
-                  <div key={exp.id} className="flex justify-between items-center p-4 border border-slate-100 rounded-lg bg-slate-50/50">
+                  <div key={exp.id} className="flex justify-between items-center p-4 border border-slate-100 rounded-lg bg-slate-50">
                     <div>
                       <p className="font-semibold text-slate-800">{exp.title}</p>
                       <p className="text-xs text-slate-500 mt-1">Amount: {exp.amount}</p>
