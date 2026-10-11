@@ -81,7 +81,7 @@ export default function App() {
   const removeExpense = (id) => setExpenses(expenses.filter(e => e.id !== id));
 
   return (
-    <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', color: '#0f172a' }} className="p-6 font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 p-6 font-sans">
       
       {/* Top Header */}
       <header className="max-w-6xl mx-auto flex justify-between items-center mb-6">
@@ -89,7 +89,7 @@ export default function App() {
           <span className="text-3xl">🏗️</span>
           <div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-              ConstructionOS <span className="text-slate-500 text-lg font-bold ml-2">- Full Stack Suite</span>
+              ConstructionOS <span className="text-slate-500 text-base font-bold ml-2">- Full Stack Suite</span>
             </h1>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function App() {
           <select 
             value={activeRole} 
             onChange={(e) => setActiveRole(e.target.value)}
-            className="bg-[#2d3748] text-white text-sm font-semibold rounded-md px-3 py-2 focus:outline-none"
+            className="bg-slate-800 text-white text-sm font-semibold rounded-md px-3 py-2 focus:outline-none"
           >
             <option>Project Manager</option>
             <option>Site Engineer</option>
@@ -108,7 +108,7 @@ export default function App() {
       </header>
 
       {/* Navigation Tabs */}
-      <div className="max-w-6xl mx-auto flex flex-wrap gap-2 mb-6">
+      <div className="max-w-6xl mx-auto flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-3">
         {[
           { id: 'tasks', label: 'Tasks', icon: '📋' },
           { id: 'inventory', label: 'Inventory', icon: '📦' },
@@ -139,20 +139,20 @@ export default function App() {
         {activeTab === 'tasks' && (
           <>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-4 text-center">Assign New Task</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-4 text-center">Assign New Task</h2>
               <form onSubmit={handleAddTask} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Task Description"
                   value={taskTitle}
                   onChange={(e) => setTaskTitle(e.target.value)}
-                  className="flex-1 bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="flex-1 bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none focus:border-blue-500"
                   required
                 />
                 <select
                   value={taskRole}
                   onChange={(e) => setTaskRole(e.target.value)}
-                  className="bg-[#2d3748] text-white rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="bg-white text-slate-900 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 >
                   <option>Site Engineer</option>
                   <option>Project Manager</option>
@@ -160,7 +160,7 @@ export default function App() {
                 <select
                   value={taskPriority}
                   onChange={(e) => setTaskPriority(e.target.value)}
-                  className="bg-[#2d3748] text-white rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="bg-white text-slate-900 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 >
                   <option>Medium</option>
                   <option>High</option>
@@ -173,7 +173,7 @@ export default function App() {
             </div>
 
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-6 text-center">Task List ({tasks.length})</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-6 text-center">Task List ({tasks.length})</h2>
               <div className="space-y-4">
                 {tasks.map((task) => (
                   <div key={task.id} className="flex justify-between items-center p-3 border-b border-slate-100">
@@ -206,14 +206,14 @@ export default function App() {
         {activeTab === 'inventory' && (
           <>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-4 text-center">Add Inventory Item</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-4 text-center">Add Inventory Item</h2>
               <form onSubmit={handleAddInventory} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Item Name (e.g. Bricks)"
                   value={itemName}
                   onChange={(e) => setItemName(e.target.value)}
-                  className="flex-1 bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="flex-1 bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none focus:border-blue-500"
                   required
                 />
                 <input
@@ -221,7 +221,7 @@ export default function App() {
                   placeholder="Quantity (e.g. 1000 Units)"
                   value={itemQty}
                   onChange={(e) => setItemQty(e.target.value)}
-                  className="bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
@@ -231,7 +231,7 @@ export default function App() {
             </div>
 
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-6 text-center">Inventory Stock ({inventory.length})</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-6 text-center">Inventory Stock ({inventory.length})</h2>
               <div className="space-y-4">
                 {inventory.map((inv) => (
                   <div key={inv.id} className="flex justify-between items-center p-3 border-b border-slate-100">
@@ -257,20 +257,20 @@ export default function App() {
         {activeTab === 'labour' && (
           <>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-4 text-center">Register New Worker</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-4 text-center">Register New Worker</h2>
               <form onSubmit={handleRegisterWorker} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Worker Full Name"
                   value={workerName}
                   onChange={(e) => setWorkerName(e.target.value)}
-                  className="flex-1 bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="flex-1 bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none focus:border-blue-500"
                   required
                 />
                 <select
                   value={workerRole}
                   onChange={(e) => setWorkerRole(e.target.value)}
-                  className="bg-[#2d3748] text-white rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="bg-white text-slate-900 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 >
                   <option>Steel Fixer</option>
                   <option>Mason</option>
@@ -281,7 +281,7 @@ export default function App() {
                   placeholder="Daily Wage (₹)"
                   value={workerWage}
                   onChange={(e) => setWorkerWage(e.target.value)}
-                  className="bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                 />
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
                   + Register Worker
@@ -290,7 +290,7 @@ export default function App() {
             </div>
 
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-              <h2 className="text-xl font-black text-slate-800 mb-6 text-center">Daily Attendance Roster</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-6 text-center">Daily Attendance Roster</h2>
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-slate-100 text-slate-700 text-xs font-black uppercase border-b">
@@ -338,14 +338,14 @@ export default function App() {
         {activeTab === 'expenses' && (
           <>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-4 text-center">Log New Expense</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-4 text-center">Log New Expense</h2>
               <form onSubmit={handleAddExpense} className="flex flex-col md:flex-row gap-3">
                 <input
                   type="text"
                   placeholder="Expense Description"
                   value={expTitle}
                   onChange={(e) => setExpTitle(e.target.value)}
-                  className="flex-1 bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="flex-1 bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none focus:border-blue-500"
                   required
                 />
                 <input
@@ -353,7 +353,7 @@ export default function App() {
                   placeholder="Amount (₹)"
                   value={expAmount}
                   onChange={(e) => setExpAmount(e.target.value)}
-                  className="bg-[#2d3748] text-white placeholder-slate-400 rounded-md p-2.5 text-sm font-medium focus:outline-none"
+                  className="bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-md p-2.5 text-sm font-medium focus:outline-none"
                   required
                 />
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-md transition">
@@ -363,7 +363,7 @@ export default function App() {
             </div>
 
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-800 mb-6 text-center">Recorded Expenses ({expenses.length})</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-6 text-center">Recorded Expenses ({expenses.length})</h2>
               <div className="space-y-4">
                 {expenses.map((exp) => (
                   <div key={exp.id} className="flex justify-between items-center p-3 border-b border-slate-100">
@@ -388,7 +388,7 @@ export default function App() {
         {/* --- DOCUMENTS & AI ANALYTICS --- */}
         {(activeTab === 'documents' || activeTab === 'analytics') && (
           <div className="bg-white p-12 rounded-xl border border-slate-200 shadow-sm text-center">
-            <h2 className="text-xl font-black text-slate-800 mb-2 capitalize">{activeTab} Dashboard</h2>
+            <h2 className="text-xl font-black text-slate-900 mb-2 capitalize">{activeTab} Dashboard</h2>
             <p className="text-sm font-bold text-slate-500">Module view is active and ready.</p>
           </div>
         )}
